@@ -13,10 +13,11 @@ def home(request):
 def user_list(request):
     users = User.objects.all()
     return render(request, 'user/list.html',{'users':users})
-    
+
 @staff_member_required
 @login_required
 def user_delete(request, user_id):
     user = User.objects.get(pk=user_id)
     user.delete()
+    messages.success(request, 'Usuario apagado com sucesso!!')
     return redirect('/polls/user/')
